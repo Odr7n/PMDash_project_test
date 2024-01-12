@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <style>
+        #main_article
+        {
+            margin-top: 2em;
+            margin-left: 15em;
+        }
+
+        #main_article h2
+        {
+            font-size: 2em;
+            text-align: center;
+        }
+
+        #main_article img
+        {
+             display: block;
+             margin-left: auto;
+             margin-right: auto;
+             width: 50%;
+        }
+        #flex-container-local
+        {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+        }
+        .flex-item-local
+        {
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            font-family: Verdana;
+            background-color: #6a7395;
+            color: white;
+            border-radius: 20px;
+        }
+        .p_dashboards
+        {
+            text-align: left;
+            font-style: italic;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="main_article">
+        <h2> Список доступных дашбордов </h2>
+
+
+        {%if articles.first == None %}
+        <div>
+            <h3 class="p_sign">Данные не были загружены, графики отсутствуют</h3>
+        </div>
+        {% else %}
+        <div id="flex-container-local">
+            {% for article in articles %}
+            <div class="flex-item-local">
+                <h3>{{ article.title }}</h3>
+                {% for image in images %}
+                    {% if image.article_id == article.id %}
+                    <img src="{{image.image.url}}">
+                    {% endif%}
+                {% endfor %}
+                <p class="p_dashboards">Автор: {{ article.author }}</p>
+                <p class="p_dashboards">Дата создания: {{ article.date }}</p>
+                <p class="p_dashboards">Просмотры: {{article.get_views}}</p>
+                <p><a href="{{ article.get_absolute_url }}">Открыть дашборд...</a></p>
+            </div>
+             {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

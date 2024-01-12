@@ -1,0 +1,81 @@
+{% extends 'all_apps/base.html' %}
+
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+{% load static %}
+{% load widget_tweaks %}
+{% load sorting_tags %}
+{% load render_table from django_tables2 %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %} Дашборды {% endblock title %}
+{% block header %} {% include 'pmdash/header_template.html' %} {% endblock %}
+{% block sidebar %} {% include 'pmdash/sidebar_template.html' %} {% endblock %}
+
+
+{% block main %}
+
+<head>
+    <style>
+        .dashboards_search_style
+        {
+            width: 30%;
+            margin:2% auto;
+        }
+        .dashboards_search_table_style
+        {
+            width: 50%;
+            margin:2% auto;
+            background-color: #6a7395;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-center">
+   <h1>Все дашборды</h1>
+</div>
+
+
+
+<!-- Фильтры для поиска  -->
+<div class="dashboards_search_style">
+    <div>
+        <div class="container">
+            <a class="text-dark text-sm mb-1" href="{% url 'news_app:news_list' %}">x Очистить фильтры</a>
+            <form action="" method="get">
+                <div style="display: grid;">
+                     {% for field in filter.form %}
+                    <div id="form-field-{{ forloop.counter0 }}">
+                        <!-- widget_tweaks -->
+                        {{ field.label_tag }} {% render_field field class="form-control" %}
+
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-outline-secondary mb-3 mt-2">Найти</button>
+            </form>
+        </div>
+        <br />
+    </div>
+</div>
+
+<h3 class="text-center">Результаты поиска</h3>
+    <div class="dashboards_search_table_style">
+        {% render_table table %}
+    </div>
+
+</body>
+{% endblock %}
+{% block footer %} {% include 'pmdash/footer_template.html' %} {% endblock %}
+
+
+
+
+
+
+
+
+

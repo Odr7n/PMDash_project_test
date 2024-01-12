@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div >
+        <div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Редактировать профиль</h5>
+                </div>
+
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %} {{ user_form|crispy }} {{ profile_form|crispy }}
+
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="changing_profile">Сохранить изменения</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

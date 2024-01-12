@@ -1,0 +1,84 @@
+{% load static %}
+{% load bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load i18n widget_tweaks %}
+{% load i18n %}
+<head>
+
+</head>
+<body>
+       <!--Окно данных пользователя-->
+<div class="container-fluid">
+    <div class="text-center" style="margin-top: 30px;">
+        <h2>Личный кабинет</h2>
+        <br/>
+
+        <div >
+            <div class="card">
+                <h4 class="card-title font-weight-bold text-center mt-3 fst-normal">Пользователь: {{ user.username }}</h4>
+                <hr />
+
+                <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{{ request.user.account.account_image.url }}" alt="{{ request.user.username }}" class="rounded-circle" width="150" />
+                    {{ account_form.account_image }}
+                </div>
+                <br />
+                <div class="card-text">
+                    <p class="text-muted mb-0" style="font-size: 12px font-weight: 700">Логин:</p>
+                    <p>{{ user.username }}</p>
+                    <p class="text-muted mb-0" style="font-size: 12px font-weight: 700">Имя:</p>
+                    <p>{{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="text-muted mb-0" style="font-size: 12px font-weight: 700 ">Электронная почта:</p>
+                    <p>{{ user.email }}</p>
+
+                    <!-- Button trigger modal -->
+                    <div class="text-center">
+<!--                        <a class="btn btn-outline-secondary" href="{% url 'users_app:profile_delete' %}" style="width: 10%; height: 10%;">Удалить аккаунт</a>-->
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#profileModal" style="width: 10%; height: 10%;">Редактировать профиль</button>
+                    </div>
+                    <br>
+
+
+                        <div class="text-center">
+                            <a class="btn btn-outline-secondary" href="{% url 'users_app:change_password' %}" style="width: 10%; height: 10%;">Сменить пароль</a>
+                        </div>
+                     <br>
+
+
+                    <div class="text-center">
+                        <a class="btn btn-outline-secondary" href="{% url 'users_app:profile_delete' %}" style="width: 10%; height: 10%;">Удалить аккаунт</a>
+<!--                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal" style="width: 10%; height: 10%;">Удалить аккаунт</button>-->
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Всплывающее окно редактирования профиля-->
+<div class="modal fade"  tabindex="-2" id="profileModal" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-l" role="document" >
+        <div class="modal-content" style="background-color: #a5abc0;">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin:0 auto;">Редактировать профиль</h5>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %} {{ user_form|crispy }} {{ profile_form|crispy }}
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-secondary" name="changing_profile">Сохранить изменения</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+

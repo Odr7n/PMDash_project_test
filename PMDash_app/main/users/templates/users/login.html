@@ -1,0 +1,32 @@
+{% extends 'all_apps/base.html' %}
+
+{% load static %}
+{% load bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block title %} Вход в аккаунт {% endblock title %}
+{% block header %} {% include 'pmdash/header_template.html' %} {% endblock %}
+{% block sidebar %} {% include 'pmdash/sidebar_template.html' %} {% endblock %}
+
+
+{% block main %}
+
+ <!--Login-->
+ <div class="container py-5">
+        <h1> Вход в аккаунт</h1> <br> <br>
+
+        <form method="POST">
+		{% csrf_token %}
+		{{ login_form|crispy }}
+		<button class="btn btn-outline-secondary" type="submit">Войти</button>
+	    </form>
+
+        <p class="text-center">У вас еще нет аккаунта? <a style="color: green;" href="{% url 'users_app:register' %}">Зарегистрироваться</a></p>
+
+
+
+
+    </div>
+
+
+{% endblock %}

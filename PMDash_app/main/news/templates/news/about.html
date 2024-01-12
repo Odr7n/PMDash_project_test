@@ -1,0 +1,20 @@
+{% extends 'all_apps/base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'news/css/styles.css'  %}">
+
+{% block title %} О нас {% endblock %}
+{% block header %} {% include 'pmdash/header_template.html' %} {% endblock %}
+{% block sidebar %} {% include 'pmdash/sidebar_template.html' %} {% endblock %}
+
+{% block content %}
+
+
+
+<div class="login_info">
+        <h1>здесь будет информация о редакторах сайта</h1>
+</div>
+
+
+
+{% endblock content %}

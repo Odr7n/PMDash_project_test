@@ -1,0 +1,38 @@
+{% load static %}
+<!--Sidebar-->
+<div class="flex-container">
+    <div class="flex-item">
+        <a href="{% url 'pmdash_home' %}">
+            <i class="fa fa-house menu-icon {% if request.path == '/pmdash' %} sidebar_link_active {% endif %}"></i>
+            <div>
+                Главная
+            </div>
+        </a>
+        <br>
+        <br>
+        <br>
+        <hr/>
+    </div>
+<!--    <div class="flex-item">-->
+<!--        <a href="{% url 'pmdash_main' %}"> Основной дашборд </a>-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <hr/>-->
+<!--    </div>-->
+    <div class="flex-item">
+        <a href="{% url 'pmdash_all' %}"> Список дашбордов </a>
+        <br>
+        <br>
+        <br>
+        <hr/>
+    </div>
+    <div class="flex-item">
+        <a href="{% url 'pmdash_account' %}"> Аккаунт </a>
+        <br>
+        <br>
+        <br>
+        <hr/>
+    </div>
+    <div class="flex-item-last"></div>
+</div>
